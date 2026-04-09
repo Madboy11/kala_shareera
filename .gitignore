@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+/android/build/
+*.pck
+*.apk
+
+# Large 3D Assets (Exceeds GitHub limits)
+assets/3d models/gurukul/gurukul.glb
+assets/3d models/tree/tree2.glb
+
+# Large Textures / Not Needed in Repo
+assets/3d models/gurukul/*.png
+assets/3d models/gurukul/*.jpg
+
+# Temp and OS files
+.DS_Store
+Thumbs.db
+*.tmp
