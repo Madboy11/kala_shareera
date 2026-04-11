@@ -9,6 +9,10 @@ var scenes = {
 	"mamsadhara": "res://scenes/modules/mamsadhara_module.tscn",
 	"raktadhara": "res://scenes/modules/raktadhara_module.tscn",
 	"medodhara": "res://scenes/modules/medodhara_module.tscn",
+	"sleshmadhara": "res://scenes/modules/sleshmadhara_module.tscn",
+	"purishadhara": "res://scenes/modules/purishadhara_module.tscn",
+	"pittadhara": "res://scenes/modules/pittadhara_module.tscn",
+	"shukradhara": "res://scenes/modules/shukradhara_module.tscn",
 }
 
 var current_scene: String = ""
@@ -24,13 +28,19 @@ func load_scene(scene_name: String):
 	previous_scene = current_scene
 	current_scene = scene_name
 	
-	# Show loading screen
+	# Fade to black first
 	if UIManager != null:
 		UIManager.show_loading()
+	
+	# Wait for the fade-in to complete before switching scenes
+	await get_tree().create_timer(1.2).timeout
 	
 	var error = get_tree().change_scene_to_file(scenes[scene_name])
 	if error != OK:
 		push_error("Failed to change scene")
+	
+	# Hold the loading screen a bit so the user reads the message
+	await get_tree().create_timer(1.0).timeout
 	
 	emit_signal("scene_loaded", scene_name)
 	

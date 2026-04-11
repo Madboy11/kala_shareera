@@ -27,6 +27,7 @@ skeleton = NodePath("../SpotLight3D")
 script = ExtResource("3_uwxr6")
 video_screen_mesh = NodePath(".")
 video_player = NodePath("VideoStreamPlayer")
+auto_play_video_name = "kala3"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="MeshInstance3D"]
 offset_right = 40.0

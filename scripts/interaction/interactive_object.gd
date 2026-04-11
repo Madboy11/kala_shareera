@@ -65,6 +65,10 @@ func on_gaze_enter():
 		if main_icon:
 			original_material.albedo_color = Color(1.0, 1.0, 1.0)
 	
+	# Audio feedback
+	if AudioManager != null:
+		AudioManager.play_hover()
+	
 	# Scale feedback
 	if mesh:
 		var tween = create_tween()
@@ -84,5 +88,8 @@ func on_gaze_exit():
 		tween.tween_property(mesh, "scale", Vector3.ONE, 0.2).set_trans(Tween.TRANS_SINE)
 
 func on_gaze_interact():
+	# Audio feedback
+	if AudioManager != null:
+		AudioManager.play_click()
 	# Override in derived classes
 	print("Interacted with: ", action_id)

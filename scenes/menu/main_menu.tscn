@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgdhj838j141j"]
+[gd_scene load_steps=19 format=3 uid="uid://dgdhj838j141j"]
 
 [ext_resource type="PackedScene" uid="uid://bcho3iyrp1vax" path="res://scenes/player/universal_rig.tscn" id="2_247la"]
 [ext_resource type="PackedScene" uid="uid://cwwtxs0u5gktn" path="res://scenes/ui/button.tscn" id="3_hj162"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ms45584fjoe5" path="res://assets/icons/kala6.png" id="10_41tvm"]
 [ext_resource type="Texture2D" uid="uid://bb0o7ppcw07hl" path="res://assets/icons/kala7.png" id="11_vxdmp"]
 [ext_resource type="Texture2D" uid="uid://cb0vafoki8u06" path="res://assets/ui/scroll.png" id="12_scroll"]
+[ext_resource type="Script" uid="uid://c2vruetojx2vi" path="res://scripts/menu/main_menu_controller.gd" id="13_ctrl"]
+[ext_resource type="Script" uid="uid://dg61g0cocvh31" path="res://scripts/ui/tutorial_overlay.gd" id="14_tuts"]
 
 [sub_resource type="Environment" id="Environment_qgo02"]
 background_energy_multiplier = 1.5
@@ -34,6 +36,7 @@ emission_texture = ExtResource("12_scroll")
 material = SubResource("StandardMaterial3D_scroll")
 
 [node name="MainMenu" type="Node3D"]
+script = ExtResource("13_ctrl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qgo02")
@@ -108,6 +111,18 @@ main_icon = ExtResource("11_vxdmp")
 transform = Transform3D(4.2194843, 0, 0, 0, -4.3711392e-08, -2.5068955, 0, 1.0000001, -1.0957989e-07, 0.040664673, -0.30498934, -0.72759914)
 mesh = SubResource("PlaneMesh_vovv2")
 
+[node name="ExitButton" parent="scroll" instance=ExtResource("3_hj162")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.8, -0.995, -2.35, -0.5)
+action_id = "exit"
+label_text = "Exit App"
+hover_color = Color(1, 0.25, 0.2, 1)
+
+[node name="AboutButton" parent="scroll" instance=ExtResource("3_hj162")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.8, 1.176, -2.35, -0.5)
+action_id = "about"
+label_text = "About"
+hover_color = Color(0.3, 0.6, 1, 1)
+
 [node name="tree2" parent="." instance=ExtResource("9_vovv2")]
 transform = Transform3D(1.4506285, 0, 1.3768358, 0, 2, 0, -1.3768358, 0, 1.4506285, 0.6661966, -1.4036144, -12.731003)
 metadata/_edit_group_ = true
@@ -146,3 +161,6 @@ light_specular = 0.0
 spot_range = 52.211975
 spot_angle = 9.225192
 metadata/_edit_group_ = true
+
+[node name="TutorialOverlay" type="Node" parent="."]
+script = ExtResource("14_tuts")
