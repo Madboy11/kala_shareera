@@ -13,7 +13,7 @@ size = Vector3(0.6201019, 0.6296387, 0.123535156)
 
 [node name="Button" type="StaticBody3D"]
 script = ExtResource("1_di1ux")
-hover_color = Color(13.409415, 9.806112, 0, 1)
+hover_color = Color(0.4, 0.7, 1.0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)

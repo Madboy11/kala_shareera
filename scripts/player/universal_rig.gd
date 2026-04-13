@@ -2,26 +2,25 @@ extends Node3D
 
 func _ready() -> void:
 	var platform = OS.get_name()
-	
-	if platform == "Windows" or platform == "macOS" or platform == "Linux":
-		print("Universal Rig: Desktop OS Detected! Booting Desktop Rig.")
+
+	if platform == "Android":
 		var xr_interface = XRServer.find_interface("OpenXR")
-		if xr_interface and xr_interface.is_initialized():
-			print("Universal Rig: Shutting down OpenXR hooks for desktop mode.")
-			xr_interface.uninitialize()
-		get_tree().root.use_xr = false
-		_spawn_rig("res://scenes/player/desktop_camera_rig.tscn")
-	elif platform == "Android":
-		# Check if the OpenXR plugin successfully booted VR hooks
-		var xr_interface = XRServer.find_interface("OpenXR")
-		if xr_interface and xr_interface.is_initialized():
-			print("Universal Rig: Detected OpenXR! Booting Quest Rig.")
+		if xr_interface and (xr_interface.is_initialized() or xr_interface.initialize()):
+			print("Universal Rig: OpenXR ready – booting Quest Rig.")
 			_spawn_rig("res://scenes/player/quest_camera_rig.tscn")
 		else:
-			print("Universal Rig: OpenXR failed or not present. Booting Mobile Gyro Rig.")
-			_spawn_rig("res://scenes/player/vr_camera_rig.tscn")
+			# Android phone – main menu needs flat (non-stereo) rendering with touch
+			# Modules use vr_camera_rig (spawned by universal_rig when scene is a module)
+			var scene_path = get_tree().current_scene.scene_file_path
+			if "main_menu" in scene_path:
+				print("Universal Rig: Android Phone (Main Menu) – flat camera + touch.")
+				_spawn_rig("res://scenes/player/desktop_camera_rig.tscn")
+			else:
+				print("Universal Rig: Android Phone (Module) – Gyro VR stereo.")
+				_spawn_rig("res://scenes/player/vr_camera_rig.tscn")
 	else:
-		# Fallback to desktop for anything else
+		# Desktop / Editor
+		print("Universal Rig: Desktop – booting Desktop Rig.")
 		_spawn_rig("res://scenes/player/desktop_camera_rig.tscn")
 
 func _spawn_rig(path: String) -> void:

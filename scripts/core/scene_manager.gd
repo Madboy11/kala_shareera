@@ -5,6 +5,7 @@ signal scene_loaded(scene_name: String)
 
 var scenes = {
 	"menu": "res://scenes/menu/main_menu.tscn",
+	"credits": "res://scenes/menu/credits_scene.tscn",
 	"intro": "res://scenes/modules/intro_module.tscn",
 	"mamsadhara": "res://scenes/modules/mamsadhara_module.tscn",
 	"raktadhara": "res://scenes/modules/raktadhara_module.tscn",
@@ -47,8 +48,33 @@ func load_scene(scene_name: String):
 	if UIManager != null:
 		UIManager.hide_loading()
 
+func _is_android_phone() -> bool:
+	if OS.get_name() != "Android":
+		return false
+	var xr = XRServer.find_interface("OpenXR")
+	return not (xr and xr.is_initialized())
+
 func load_module(module_name: String):
-	load_scene(module_name)
+	if not scenes.has(module_name):
+		push_error("Scene not found: " + module_name)
+		return
+
+	if _is_android_phone():
+		# Android phone: show loading screen and wait 20s for user to insert phone into VR headset
+		emit_signal("scene_loading", module_name)
+		if UIManager != null:
+			UIManager.show_loading()
+		# Give user 20 seconds to put phone into cardboard/VR headset
+		await get_tree().create_timer(20.0).timeout
+		previous_scene = current_scene
+		current_scene = module_name
+		get_tree().change_scene_to_file(scenes[module_name])
+		await get_tree().create_timer(1.0).timeout
+		emit_signal("scene_loaded", module_name)
+		if UIManager != null:
+			UIManager.hide_loading()
+	else:
+		load_scene(module_name)
 
 func return_to_menu():
 	load_scene("menu")

@@ -14,9 +14,17 @@ signal video_finished(video_name: String)
 func _ready():
 	if video_player:
 		video_player.finished.connect(_on_video_finished)
-		
+
+	# Make the video screen self-lit so it's visible in the dark void_space environment
+	if video_screen_mesh:
+		var mat = video_screen_mesh.get_active_material(0)
+		if mat and mat is StandardMaterial3D:
+			mat.albedo_color = Color(1, 1, 1, 1)
+			mat.emission_enabled = true
+			mat.emission = Color(1, 1, 1)
+			mat.emission_energy_multiplier = 0.05  # Subtle — video texture provides brightness
+
 	if auto_play_video_name != "":
-		# Add a tiny delay so the scene loads first before video triggers
 		get_tree().create_timer(0.5).timeout.connect(func(): play_video(auto_play_video_name))
 
 func play_video(video_name: String):

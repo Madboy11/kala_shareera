@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c41agxjsysw1"
-path="res://.godot/imported/kala6.png-5863656ea1c72c2a0e5327e6b81281cd.ctex"
+uid="uid://cxx22vgwp1lvb"
+path="res://.godot/imported/exit.svg-f6561dad3fe4add8b573167dd27ee7fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/kala6.png"
-dest_files=["res://.godot/imported/kala6.png-5863656ea1c72c2a0e5327e6b81281cd.ctex"]
+source_file="res://assets/icons/exit.svg"
+dest_files=["res://.godot/imported/exit.svg-f6561dad3fe4add8b573167dd27ee7fb.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

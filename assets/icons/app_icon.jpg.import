@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c41agxjsysw1"
-path="res://.godot/imported/kala6.png-5863656ea1c72c2a0e5327e6b81281cd.ctex"
+uid="uid://ckjaqlyrh08sh"
+path="res://.godot/imported/app_icon.jpg-6c2ae7a8faa707ae3a44e1ba1b9eac93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/kala6.png"
-dest_files=["res://.godot/imported/kala6.png-5863656ea1c72c2a0e5327e6b81281cd.ctex"]
+source_file="res://assets/icons/app_icon.jpg"
+dest_files=["res://.godot/imported/app_icon.jpg-6c2ae7a8faa707ae3a44e1ba1b9eac93.ctex"]
 
 [params]
 

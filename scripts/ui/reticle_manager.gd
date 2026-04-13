@@ -1,39 +1,39 @@
+## ReticleManager – autoload singleton that controls the gaze feeling circle HUD.
+## The actual drawing is done by GazeCircle (_draw-based custom Control) inside
+## the GazeReticle CanvasLayer scene which is instantiated here at runtime.
 extends CanvasLayer
 
-@onready var reticle_sprite = $Center/ReticleSprite if has_node("Center/ReticleSprite") else null
-@onready var progress_ring = $Center/ProgressRing if has_node("Center/ProgressRing") else null
+const RETICLE_SCENE := "res://scenes/ui/gaze_reticle.tscn"
 
-enum State { IDLE, HOVER, DWELL }
-var current_state = State.IDLE
+var _gaze_circle: Control = null   # the GazeCircle node inside the scene
 
-func _ready():
-	reset()
+func _ready() -> void:
+	layer = 50  # Below UIManager (100) so transitions still overlay it
+	_spawn_reticle()
 
-func set_progress(value: float):
-	if value > 0.0:
-		current_state = State.DWELL
-		if progress_ring:
-			progress_ring.value = value * 100
-			progress_ring.visible = true
-	else:
-		current_state = State.IDLE
-		if progress_ring:
-			progress_ring.visible = false
+func _spawn_reticle() -> void:
+	if not FileAccess.file_exists(RETICLE_SCENE):
+		push_warning("ReticleManager: gaze_reticle.tscn not found, reticle disabled.")
+		return
+	var packed = load(RETICLE_SCENE)
+	if packed == null:
+		push_warning("ReticleManager: failed to load gaze_reticle.tscn.")
+		return
+	var instance = packed.instantiate()
+	add_child(instance)
+	# Locate the GazeCircle node (Control with set_progress method)
+	_gaze_circle = instance.get_node_or_null("Center/GazeCircle")
+	if _gaze_circle == null:
+		push_warning("ReticleManager: GazeCircle node not found in reticle scene.")
 
-func set_hover(active: bool):
-	if active:
-		current_state = State.HOVER
-		if reticle_sprite:
-			reticle_sprite.scale = Vector2(1.5, 1.5)
-	else:
-		current_state = State.IDLE
-		if reticle_sprite:
-			reticle_sprite.scale = Vector2(1.0, 1.0)
+## Called by gaze_controller.gd every frame with value 0.0–1.0.
+func set_progress(value: float) -> void:
+	if _gaze_circle and _gaze_circle.has_method("set_progress"):
+		_gaze_circle.set_progress(value)
 
-func reset():
-	current_state = State.IDLE
-	if progress_ring:
-		progress_ring.value = 0
-		progress_ring.visible = false
-	if reticle_sprite:
-		reticle_sprite.scale = Vector2(1.0, 1.0)
+## Convenience helpers kept for backwards compatibility.
+func set_hover(_active: bool) -> void:
+	pass  # Handled by colour change inside GazeCircle.set_progress()
+
+func reset() -> void:
+	set_progress(0.0)

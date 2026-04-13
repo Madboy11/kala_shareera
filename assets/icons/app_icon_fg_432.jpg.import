@@ -2,12 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bksf8xlgsp8f7"
+uid="uid://ohgkpf8uo1sw"
 valid=false
 
 [deps]
 
-source_file="res://assets/icons/app_icon.png"
+source_file="res://assets/icons/app_icon_fg_432.jpg"
 
 [params]
 

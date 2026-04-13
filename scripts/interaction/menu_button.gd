@@ -34,7 +34,7 @@ func on_gaze_interact():
 		"shukradhara":
 			SceneManager.load_module("shukradhara")
 		"about":
-			_show_about_panel()
+			SceneManager.load_scene("credits")
 		"exit":
 			get_tree().quit()
 
@@ -52,14 +52,19 @@ func _create_inline_about():
 	var panel = Node3D.new()
 	panel.name = "AboutPanelTemp"
 	get_tree().current_scene.add_child(panel)
-	
-	# Find camera position to place panel in front
-	var cameras = get_tree().get_nodes_in_group("vr_camera")
-	if cameras.size() > 0:
-		panel.global_position = cameras[0].global_position + cameras[0].global_transform.basis.z * -2.0
-		panel.look_at(cameras[0].global_position)
+
+	# Use get_camera_3d() — works on desktop without needing a group
+	var cam = get_viewport().get_camera_3d()
+	if cam:
+		var forward = -cam.global_transform.basis.z
+		forward.y = 0.0
+		forward = forward.normalized()
+		panel.global_position = cam.global_position + forward * 2.0
+		panel.global_position.y = cam.global_position.y
+		panel.look_at(cam.global_position)
+		panel.rotate_y(PI)
 	else:
-		panel.position = Vector3(0, 1, -2)
+		panel.global_position = Vector3(0, 1.6, 2.5)
 	
 	# Create about text
 	var label = Label3D.new()
@@ -84,7 +89,7 @@ func _create_inline_about():
 	# Create dark background panel behind text
 	var bg_mesh = MeshInstance3D.new()
 	var plane = PlaneMesh.new()
-	plane.size = Vector2(2.5, 1.8)
+	plane.size = Vector2(2.5, 3.0)
 	bg_mesh.mesh = plane
 	bg_mesh.rotation_degrees = Vector3(90, 0, 0)
 	bg_mesh.position.z = 0.05  # Slightly behind text
@@ -95,14 +100,15 @@ func _create_inline_about():
 	bg_mat.emission_enabled = true
 	bg_mat.emission = Color(0.1, 0.05, 0.15)
 	bg_mat.emission_energy_multiplier = 0.5
+	bg_mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # CRITICAL: visible from camera side
+	bg_mat.no_depth_test = true
 	bg_mesh.set_surface_override_material(0, bg_mat)
 	panel.add_child(bg_mesh)
-	
-	# Auto-dismiss after 8 seconds with fade
+
+	# Auto-dismiss after 15 seconds with fade
 	var tween = create_tween()
-	tween.tween_interval(8.0)
+	tween.tween_interval(15.0)
 	tween.tween_property(label, "modulate:a", 0.0, 0.5)
-	tween.tween_property(bg_mat, "albedo_color:a", 0.0, 0.5)
 	tween.tween_callback(func(): panel.queue_free())
 
 func _get_about_text() -> String:
@@ -124,8 +130,7 @@ as described in Ayurvedic Sharira Sthana.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Developed by: Vansh
-Engine: Godot 4.5
-Platform: Meta Quest / Android VR
+Platform: Meta Quest ◈ Android VR ◈ Desktop
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

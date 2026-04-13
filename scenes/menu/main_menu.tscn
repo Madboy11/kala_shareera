@@ -1,27 +1,26 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgdhj838j141j"]
+[gd_scene load_steps=21 format=3 uid="uid://dgdhj838j141j"]
 
 [ext_resource type="PackedScene" uid="uid://bcho3iyrp1vax" path="res://scenes/player/universal_rig.tscn" id="2_247la"]
 [ext_resource type="PackedScene" uid="uid://cwwtxs0u5gktn" path="res://scenes/ui/button.tscn" id="3_hj162"]
-[ext_resource type="Texture2D" uid="uid://f0h5l12jyhhk" path="res://assets/icons/intro.png" id="4_d4hu8"]
-[ext_resource type="Texture2D" uid="uid://bjc3chgc6e8lg" path="res://assets/icons/kala1.png" id="5_p1nwe"]
-[ext_resource type="Texture2D" uid="uid://dgblfae3k6wn4" path="res://assets/icons/kala2.png" id="6_prbor"]
-[ext_resource type="Texture2D" uid="uid://bn1rqhdsw8ajk" path="res://assets/icons/kala3.png" id="7_27h4x"]
-[ext_resource type="Texture2D" uid="uid://b4kg70x231l6y" path="res://assets/icons/kala4.png" id="8_gdhp0"]
+[ext_resource type="Texture2D" uid="uid://cwc77qe7o41v4" path="res://assets/icons/intro.png" id="4_d4hu8"]
+[ext_resource type="Texture2D" uid="uid://bxrievwioskf4" path="res://assets/icons/kala1.png" id="5_p1nwe"]
+[ext_resource type="Texture2D" uid="uid://bimoayyogpr2r" path="res://assets/icons/kala2.png" id="6_prbor"]
+[ext_resource type="Texture2D" uid="uid://dids57vmdfurv" path="res://assets/icons/kala3.png" id="7_27h4x"]
+[ext_resource type="Texture2D" uid="uid://0p3klaohcm5p" path="res://assets/icons/kala4.png" id="8_gdhp0"]
 [ext_resource type="PackedScene" uid="uid://c3fp0yjgkj7r1" path="res://assets/3d models/gurukul/gurukul.glb" id="8_qgo02"]
-[ext_resource type="Texture2D" uid="uid://bjvt8rrulnnhj" path="res://assets/icons/kala5.png" id="9_pstia"]
+[ext_resource type="Texture2D" uid="uid://dtmhr35b414ec" path="res://assets/icons/kala5.png" id="9_pstia"]
 [ext_resource type="PackedScene" uid="uid://jl2v0or2wu6m" path="res://assets/3d models/tree/tree2.glb" id="9_vovv2"]
-[ext_resource type="Texture2D" uid="uid://ms45584fjoe5" path="res://assets/icons/kala6.png" id="10_41tvm"]
-[ext_resource type="Texture2D" uid="uid://bb0o7ppcw07hl" path="res://assets/icons/kala7.png" id="11_vxdmp"]
+[ext_resource type="Texture2D" uid="uid://c41agxjsysw1" path="res://assets/icons/kala6.png" id="10_41tvm"]
+[ext_resource type="Texture2D" uid="uid://c7cx43uftxxp5" path="res://assets/icons/kala7.png" id="11_vxdmp"]
 [ext_resource type="Texture2D" uid="uid://cb0vafoki8u06" path="res://assets/ui/scroll.png" id="12_scroll"]
 [ext_resource type="Script" uid="uid://c2vruetojx2vi" path="res://scripts/menu/main_menu_controller.gd" id="13_ctrl"]
 [ext_resource type="Script" uid="uid://dg61g0cocvh31" path="res://scripts/ui/tutorial_overlay.gd" id="14_tuts"]
+[ext_resource type="Texture2D" uid="uid://bkg5j56m48ecr" path="res://assets/icons/about.svg" id="15_about"]
+[ext_resource type="Texture2D" uid="uid://cxx22vgwp1lvb" path="res://assets/icons/exit.svg" id="16_exit"]
 
 [sub_resource type="Environment" id="Environment_qgo02"]
-background_energy_multiplier = 1.5
-ambient_light_color = Color(1, 1, 1, 1)
+background_color = Color(1, 0.3811667, 0.20999998, 1)
 glow_enabled = true
-glow_intensity = 1.0
-glow_bloom = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scroll"]
 render_priority = -1
@@ -42,7 +41,7 @@ script = ExtResource("13_ctrl")
 environment = SubResource("Environment_qgo02")
 
 [node name="UniversalRig" parent="." instance=ExtResource("2_247la")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7027669, 4.210757)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02526164, 4.210757)
 
 [node name="gurukul" parent="." instance=ExtResource("8_qgo02")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.886673, -1.4506483, -15.064524)
@@ -108,7 +107,7 @@ hover_color = Color(1, 0.7166667, 0, 1)
 main_icon = ExtResource("11_vxdmp")
 
 [node name="bg" type="MeshInstance3D" parent="scroll"]
-transform = Transform3D(4.2194843, 0, 0, 0, -4.3711392e-08, -2.5068955, 0, 1.0000001, -1.0957989e-07, 0.040664673, -0.30498934, -0.72759914)
+transform = Transform3D(4.2194843, 0, 0, 0, -4.3711392e-08, -2.5068955, 0, 1.0000001, -1.0957989e-07, 0.039167576, -0.3251071, -0.72294986)
 mesh = SubResource("PlaneMesh_vovv2")
 
 [node name="ExitButton" parent="scroll" instance=ExtResource("3_hj162")]
@@ -116,12 +115,14 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.8, -0.995, -2.35, -0.5)
 action_id = "exit"
 label_text = "Exit App"
 hover_color = Color(1, 0.25, 0.2, 1)
+main_icon = ExtResource("16_exit")
 
 [node name="AboutButton" parent="scroll" instance=ExtResource("3_hj162")]
-transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.8, 1.176, -2.35, -0.5)
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.8, 1.142, -2.35, -0.538)
 action_id = "about"
 label_text = "About"
 hover_color = Color(0.3, 0.6, 1, 1)
+main_icon = ExtResource("15_about")
 
 [node name="tree2" parent="." instance=ExtResource("9_vovv2")]
 transform = Transform3D(1.4506285, 0, 1.3768358, 0, 2, 0, -1.3768358, 0, 1.4506285, 0.6661966, -1.4036144, -12.731003)
@@ -147,7 +148,7 @@ light_volumetric_fog_energy = 16.0
 light_size = 1.0
 light_specular = 0.0
 spot_range = 52.211975
-spot_angle = 9.225192
+spot_angle = 11.117346
 metadata/_edit_group_ = true
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
@@ -159,7 +160,7 @@ light_volumetric_fog_energy = 16.0
 light_size = 1.0
 light_specular = 0.0
 spot_range = 52.211975
-spot_angle = 9.225192
+spot_angle = 12.268861
 metadata/_edit_group_ = true
 
 [node name="TutorialOverlay" type="Node" parent="."]

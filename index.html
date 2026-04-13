@@ -393,11 +393,13 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .slide { padding: 40px 30px; }
+    .slide { justify-content: flex-start; padding: 80px 20px 60px 20px; }
     h1 { font-size: 36px; }
     .title-slide h1 { font-size: 42px; }
     h2 { font-size: 28px; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; gap: 8px; }
+    .flow-arrow { transform: rotate(90deg); padding: 5px 0; }
   }
 
   /* ── Animation keyframes ── */
@@ -519,7 +521,7 @@
         <tr><td>Head Tracking</td><td>Gyroscope sensor (Mobile) / Native XR (Headset)</td></tr>
         <tr><td>Interaction</td><td>Raycast-based gaze detection with dwell timer</td></tr>
         <tr><td>Shader Effects</td><td>Custom GLSL shaders for lens distortion &amp; glow</td></tr>
-        <tr><td>Scripting</td><td>GDScript (event-driven scripting language)</td></tr>
+        <tr><td>Scripting</td><td>Event-driven custom scripting language</td></tr>
         <tr><td>Platforms</td><td>Android, Meta Quest 3/3S, Desktop</td></tr>
       </tbody>
     </table>
@@ -586,42 +588,34 @@
       <div class="card" style="text-align:center;">
         <span class="card-icon">📖</span>
         <h3>Introduction</h3>
-        <p>Overview of Kala</p>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">💪</span>
-        <h3>Mamsadhara</h3>
-        <p>Muscle membrane</p>
+        <h3>Mamsadhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">🩸</span>
-        <h3>Raktadhara</h3>
-        <p>Blood membrane</p>
+        <h3>Raktadhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">🧈</span>
-        <h3>Medodhara</h3>
-        <p>Fat membrane</p>
+        <h3>Medodhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">🔥</span>
-        <h3>Pittadhara</h3>
-        <p>Bile membrane</p>
+        <h3>Pittadhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">💧</span>
-        <h3>Sleshmadhara</h3>
-        <p>Mucus membrane</p>
+        <h3>Sleshmadhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">♻️</span>
-        <h3>Purishadhara</h3>
-        <p>Excreta membrane</p>
+        <h3>Purishadhara Kala</h3>
       </div>
       <div class="card" style="text-align:center;">
         <span class="card-icon">🧬</span>
-        <h3>Shukradhara</h3>
-        <p>Reproductive membrane</p>
+        <h3>Shukradhara Kala</h3>
       </div>
     </div>
     <p style="margin-top:20px; color: var(--text-muted); font-size:14px; text-align:center; max-width:700px;">
@@ -717,11 +711,11 @@
     <span class="slide-number">12 / Platform Support</span>
     <h2>Cross-Platform Support</h2>
     <div class="grid-3">
-      <div class="card" style="text-align:center;">
+      <div class="card" style="text-align:center; opacity: 0.7;">
         <span class="card-icon">📱</span>
-        <h3>Mobile VR</h3>
+        <h3>Mobile VR <span class="badge" style="background: rgba(255, 60, 60, 0.2); color: #ff6b8a; border: 1px solid rgba(255,60,60,0.3); font-size:9px; vertical-align: middle; margin-left:5px; margin-bottom:0;">Not Available</span></h3>
         <p><strong>Input:</strong> Gyroscope + Gaze</p>
-        <p><strong>Mode:</strong> Stereo side-by-side rendering (Google Cardboard-style)</p>
+        <p><strong>Mode:</strong> Stereo side-by-side rendering</p>
       </div>
       <div class="card" style="text-align:center; border-color: var(--accent);">
         <span class="card-icon">🥽</span>
@@ -729,9 +723,9 @@
         <p><strong>Input:</strong> Native XR tracking</p>
         <p><strong>Mode:</strong> Native OpenXR immersive rendering</p>
       </div>
-      <div class="card" style="text-align:center;">
+      <div class="card" style="text-align:center; opacity: 0.7;">
         <span class="card-icon">🖥️</span>
-        <h3>Desktop</h3>
+        <h3>Desktop <span class="badge" style="background: rgba(255, 60, 60, 0.2); color: #ff6b8a; border: 1px solid rgba(255,60,60,0.3); font-size:9px; vertical-align: middle; margin-left:5px; margin-bottom:0;">Not Available</span></h3>
         <p><strong>Input:</strong> Mouse + Keyboard</p>
         <p><strong>Mode:</strong> Flat-screen 3D rendering</p>
       </div>
